@@ -1,0 +1,46 @@
+
+
+ 
+<!-- Router Outlet  -->
+<div id="content" class="container-fluid pt-3 " > 
+  <div class="row mt-5">
+    <div class="col pt-5">
+      <div class="container-fluid ">
+          <h3 class="fs-2 pb-3 fw-bold" style="color: blueviolet;" >User Overall Notes</h3>
+          <p class="pb-3" style="color: rgb(0, 0, 0);">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur, saepe? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur, voluptas!
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur, saepe? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur, voluptas!
+          </p>
+  
+          <div class="row gx-3 " style="background-color: rgba(255, 255, 255, 0.29); padding: 10px 10px 10px 10px; border-radius: 0px;"> </div> 
+  
+        
+  
+        
+       
+            <div class="container-fluid " style="background-color: rgba(255, 255, 255, 0.29);"> 
+                <div class="row mt-5">
+                  <div class="col-sm-3 mb-4 mb-sm-0" *ngFor="let notes of AllNotes">
+                    <div class="card mb-4 border-0 shadow">
+                      <div class="card-body">
+                        <h5 class="card-title">      
+                          <span> <img src="http://127.0.0.1:8000/profile/{{notes.profile}}" class="rounded-circle"  alt="Profile" width="30" height="30"></span> 
+                          &nbsp;&nbsp;   &nbsp; 
+                          {{notes.name}}</h5>
+                        <h2 class="card-text ms-5 mt-3 pb-3" style="color: blueviolet;">{{notes.count}}</h2>
+                    
+                      </div>
+                    </div>
+                  </div>
+                
+                </div>
+            </div>
+      </div>
+    </div>
+  
+  </div>
+
+   
+  </div>
+
+  
+  

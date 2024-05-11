@@ -1,0 +1,533 @@
+<!-- Navigation  -->
+<div *ngxPermissionsOnly="'User'">
+
+
+  <nav class="navbar  navbar-expand-lg sticky-top navbar-light" style="background-color: #ffffff;">
+    <div class="container-lg  pt-1 pb-1">
+      <span class="navbar-brand fw-bolder " href="#" style="color: #090909;">
+        <img src="https://logos-world.net/wp-content/uploads/2020/06/Accenture-Emblem.png" alt="" width="50"
+          height="auto">&nbsp; &nbsp;THE INTERN TEAM
+      </span>
+
+      <!-- hamburger menu  -->
+      <button class="navbar-toggler border border-0" style="color: rgb(110, 9, 141);" type="button"
+        data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false"
+        aria-label="Toggle navigation">
+        <span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" class="bi bi-list"
+            viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+              d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
+          </svg>
+        </span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
+
+          <!-- Search Field  -->
+          <!-- <li class="nav-item mt-2 mb-2 ">   
+              <input type="text" [(ngModel)]="keyword"  name="keyword" class="form-control border-1 rounded " style="background-color: #ffffff; padding:6px;"  aria-label="Sizing example input" aria-describedby="basic-addon1" placeholder="search notes ...">
+            </li>  -->
+
+          <!-- <li class="nav-item "> 
+              <a class="nav-link fs-6" aria-current="page" href="#">  &nbsp; <span class="fs-6 text-dark">SETTINGS </span>
+              </a>
+            </li> 
+
+            <li class="nav-item "> 
+              <a class="nav-link fs-6" aria-current="page" href="#">&nbsp;<span class="fs-6 text-dark" data-bs-toggle="modal" data-bs-target="#myModal">MY ACCOUNT</span> </a>
+            </li>  -->
+        </ul>
+        <span class="navbar-text fs-6 fw-bold "
+          style="color: #ffffff ;  cursor: pointer; background-color: #7310ff; border-radius: 20px; width: 100px; text-align: center;"
+          (click)="logout()">&nbsp;LOGOUT</span>
+
+      </div>
+    </div>
+  </nav>
+
+
+  <!-- Banner Image -->
+  <div class="container-fluid pt-4 pb-4 search_body " style="background-color: #000000ef;">
+    <div class="container-lg pb-5 pt-5">
+      <p class="h2 text-white fw-bold">Welcome to our <span style="color: #9e61f3;">Note Taking Application .</span>
+      </p>
+      <p class="text-light"> Built using <span style="color: rgb(255, 255, 255);">Laravel 9 </span> , <span
+          style="color:rgb(255, 255, 255);"> Angular JS , Bootstrap 5 and </span> JWT Authentication </p>
+      <p>
+        <img src="https://cdn.freebiesupply.com/logos/large/2x/laravel-1-logo-png-transparent.png" alt="" width="30"
+          height="27">
+        &nbsp;
+        <span>
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Angular_full_color_logo.svg/2048px-Angular_full_color_logo.svg.png"
+            alt="" width="40" height="40">
+        </span>
+        &nbsp;
+        <span>
+          <img src="https://seeklogo.com/images/J/jwt-logo-65D86B4640-seeklogo.com.png" alt="" width="30" height="30">
+        </span>
+        &nbsp;
+        <span>
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Bootstrap_logo.svg/1280px-Bootstrap_logo.svg.png"
+            alt="" width="40" height="33">
+        </span>
+      </p>
+      <br>
+    </div>
+  </div>
+
+
+  <!-- Modal Add  -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <!-- <div class="modal-header text-light" style="background-color: #7205e0 ; color: white;"> -->
+        <div class="modal-header text-dark">
+          <h1 class="modal-title fs-5 fw-bold" id="exampleModalLabel"> <span> <img
+                src="http://127.0.0.1:8000/profile/{{image}} xx"  class="rounded-circle" alt="Profile" width="60"
+                height="60"></span> &nbsp;&nbsp; Add Note</h1>
+          <button type="button" class="btn-close " style="color: white;" data-bs-dismiss="modal" aria-label="Close">
+          </button>
+        </div>
+
+      
+
+        <div class="modal-body">
+          <form (ngSubmit)="submit()" [formGroup]="form">
+            <div class="mb-3">
+              <!-- <label for="exampleInputEmail1" class="form-label text-primary fs-5 hidden" >User</label> -->
+              <input type="hidden" formControlName="userId" class="form-control" value="{{this.id}} ">
+            </div>
+
+
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label text-dark fs-5">Title</label>
+              <input type="text" formControlName="addTitle" name="addtitle"
+                class="form-control border-0 border-bottom rounded-0"
+                [ngClass]="{'is-invalid' : submitNote && f['addTitle'].errors}" placeholder="title...">
+              
+
+              <!-- validation  -->
+              <div *ngIf="submitNote && f['addTitle'].errors" class="invalid-feedback">
+                <div *ngIf="f['addTitle'].errors['required']">Title is Required .</div>
+              </div>
+
+              
+            </div>
+            <div class="mb-3 mt-5">
+              <label for="exampleFormControlTextarea1" class="form-label fs-5 text-dark">Content </label>
+              <textarea class="form-control border-0 border-bottom rounded-0" formControlName="addContent"
+                name="addContent" [ngClass]="{'is-invalid' : submitNote && f['addContent'].errors}"
+                id="exampleFormControlTextarea1" rows="3" placeholder="content...."></textarea>
+
+              <!-- validation  -->
+              <div *ngIf="submitNote && f['addContent'].errors" class="invalid-feedback">
+                <div *ngIf="f['addContent'].errors['required']">
+                  Content is Required .
+                </div>
+              </div>
+            </div>
+
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary">Add Note </button>
+              <button type="button" class="btn  btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Modal Update   -->
+  <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+
+        <div class="modal-header text-dark">
+          <h5 class="modal-title fs-5" id="exampleModalLabel"> <span> <img src="http://127.0.0.1:8000/profile/{{image}}"
+                class="rounded-circle" alt="Profile" width="60" height="60"></span> &nbsp;&nbsp; Edit Note No :
+            {{noteId}}</h5>
+          <button type="button" class="btn-close " style="color: white;" data-bs-dismiss="modal" aria-label="Close">
+          </button>
+        </div>
+
+        <div class="modal-body">
+          <form>
+            <!-- <div class="mb-3 form-group"> 
+              <label for="exampleInputEmail1" class="form-label text-primary fs-5 hidden" >Notes Id</label>
+              <input type="text" class="form-control" id="noteId"  [ngModelOptions]="{standalone: true}" [ngModel]="noteId" >
+          </div>  -->
+            <div class="mb-3 form-group">
+              <label for="exampleInputEmail1" class="form-label text-dark fs-5">Title</label>
+              <input type="text" id="editTitle" name="editTitle" [(ngModel)]="editTitle" [ngModelOptions]="{standalone: true}" class="form-control fs-6 border-0 border-bottom rounded-0">
+              <!-- <p contenteditable="true">{{titleValue}}</p> -->
+            </div>
+
+            <div class="mb-3 mt-5 form-group">
+              <label for="exampleFormControlTextarea1" class="form-label fs-5 text-dark">Content </label>
+              <textarea class="form-control border-0 border-bottom rounded-0" id="editContent" name="editContent"
+                [(ngModel)]="editContent" [ngModelOptions]="{standalone: true}"></textarea>
+              <!-- <p contenteditable="true">{{contentValue}}</p> -->
+            </div>
+
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" (click)="updateNote()">Update
+                Note</button>
+              <button type="button" class="btn  btn-outline-danger" data-bs-dismiss="modal">Cancel</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Notes Table  -->
+  <div class="note-body pt-5 ">
+
+    <!-- side navigation  -->
+    <div class="container-lg p-2 ">
+      <div class="row ">
+
+        <div class="col-1 pt-4 pl-5  pl-sm-4 ">
+          <!-- Add Modal Button   -->
+          <p>
+            <img src="http://127.0.0.1:8000/profile/{{image}}" class="rounded-circle" alt="Profile" width="30"
+              height="30">
+          </p>
+          <!-- Add Modal Button -->
+          <p class="fs-6 " style="color: #4904a9;" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-folder-plus"
+              viewBox="0 0 16 16">
+              <path
+                d="m.5 3 .04.87a1.99 1.99 0 0 0-.342 1.311l.637 7A2 2 0 0 0 2.826 14H9v-1H2.826a1 1 0 0 1-.995-.91l-.637-7A1 1 0 0 1 2.19 4h11.62a1 1 0 0 1 .996 1.09L14.54 8h1.005l.256-2.819A2 2 0 0 0 13.81 3H9.828a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 6.172 1H2.5a2 2 0 0 0-2 2zm5.672-1a1 1 0 0 1 .707.293L7.586 3H2.19c-.24 0-.47.042-.683.12L1.5 2.98a1 1 0 0 1 1-.98h3.672z" />
+              <path
+                d="M13.5 10a.5.5 0 0 1 .5.5V12h1.5a.5.5 0 1 1 0 1H14v1.5a.5.5 0 1 1-1 0V13h-1.5a.5.5 0 0 1 0-1H13v-1.5a.5.5 0 0 1 .5-.5z" />
+            </svg>
+          </p>
+          <!-- View Profile Modal Button   -->
+          <p class="fs-6 " style="color: #4904a9;" data-bs-toggle="modal" data-bs-target="#exampleModalView">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+              class="bi bi-person-circle" viewBox="0 0 16 16">
+              <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+              <path fill-rule="evenodd"
+                d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+            </svg>
+          </p>
+          <!-- Setting Modal Button  -->
+          <p class="fs-6 " style="color: #4904a9;" data-bs-toggle="modal" data-bs-target="#exampleModalSettings">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-sliders"
+              viewBox="0 0 16 16">
+              <path fill-rule="evenodd"
+                d="M11.5 2a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM9.05 3a2.5 2.5 0 0 1 4.9 0H16v1h-2.05a2.5 2.5 0 0 1-4.9 0H0V3h9.05zM4.5 7a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM2.05 8a2.5 2.5 0 0 1 4.9 0H16v1H6.95a2.5 2.5 0 0 1-4.9 0H0V8h2.05zm9.45 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm-2.45 1a2.5 2.5 0 0 1 4.9 0H16v1h-2.05a2.5 2.5 0 0 1-4.9 0H0v-1h9.05z" />
+            </svg>
+          </p>
+
+          <p class="fs-6 " style="color: #4904a9;" data-bs-toggle="modal" data-bs-target="#exampleModalSearch">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-search"
+              viewBox="0 0 16 16">
+              <path
+                d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+            </svg>
+          </p>
+
+
+
+
+          <!-- Button trigger modal sample  -->
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal20">
+            Update Moa File
+          </button>
+
+          <!-- Modal sample -->
+          <div class="modal fade" id="exampleModal20" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <form (ngSubmit)="sample2()" [formGroup]="form2">
+                    <div class="mb-3">
+                      <label for="exampleInputEmail1" class="form-label text-dark fs-5">Memorandun of Agreement</label>
+                      <input type="file" (change)="uploadMoa($event)" accept=".pdf" formControlName="moa" name="moa"
+                        class="form-control border-0 border-bottom rounded-0"
+                        [ngClass]="{'is-invalid' : submitNote2 && u['moa'].errors}" placeholder="sample">
+                      <!-- validation  -->
+                      <div *ngIf="submitNote2 && u['moa'].errors" class="invalid-feedback">
+                        <div *ngIf="u['moa'].errors['required']">Moa is required .</div>
+                      </div>
+                    </div>
+                    <div class="mb-3">
+                      <label for="exampleInputEmail1" class="form-label text-dark fs-5">Start Date</label>
+                      <input type="date" formControlName="start_date" name="start_date"
+                        class="form-control border-0 border-bottom rounded-0"
+                        [ngClass]="{'is-invalid' : submitNote2 && u['start_date'].errors}">
+
+                      <!-- validation  -->
+                      <div *ngIf="submitNote2 && u['start_date'].errors" class="invalid-feedback">
+                        <div *ngIf="u['start_date'].errors['required']">Start Date is required .</div>
+                      </div>
+
+
+                    </div>
+
+                    <div class="mb-3">
+                      <label for="exampleInputEmail1" class="form-label text-dark fs-5">End Date</label>
+                      <input type="date" formControlName="end_date" name="end_date"
+                        class="form-control border-0 border-bottom rounded-0"
+                        [ngClass]="{'is-invalid' : submitNote2 && u['end_date'].errors}">
+
+                      <!-- validation  -->
+                      <div *ngIf="submitNote2 && u['end_date'].errors" class="invalid-feedback">
+                        <div *ngIf="u['end_date'].errors['required']">End Date is required .</div>
+                      </div>
+                    </div>
+
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+                  <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- vertical line  -->
+        <div class="d-flex col-1 pt-4" style="height: 200px;">
+          <div class="vr"></div>
+        </div>
+
+
+        <!-- Notes Container  -->
+        <div class="col-10 pt-4 ">
+          <div class="container-fluid">
+            <div class="">
+              <div class="row">
+                <div class="col-3 ">
+                  <p class="fs-6 fw-bold  ">My Notes </p>
+                </div>
+
+                <div class="col-9 d-flex flex-row-reverse">
+                  <!-- <p style="padding-left: 100px;"> 
+                              <input type="text" [(ngModel)]="keyword"  name="keyword" class="form-control border-1 rounded-pill " style="background-color: #ffffff; padding:6px;"  aria-label="Sizing example input" aria-describedby="basic-addon1" placeholder="search notes title or keyword">
+                              </p>  -->
+
+                  <p class="fw-bold" style="color: #4904a9;">{{this.name}}</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Conditional Template  -->
+            <div *ngIf="arrayCount; then thenTemplateName else elseTemplateName">
+              Here is never showing
+            </div>
+
+            <!-- With notes created Template  -->
+            <ng-template #thenTemplateName>
+
+              <div class="row mt-4">
+
+
+                <div class="col-sm-4 mt-3 mb-5"
+                  *ngFor="let Notes of NotesArray | filter: keyword | paginate: { itemsPerPage: 6, currentPage: p }">
+
+                  <div class="note-container card shadow rounded-0 border border-0">
+                    <div class="card-body ">
+                      <!-- <h5>{{Notes.id}}</h5> -->
+                      <p class="h5 fw-bold" style="color: #000000;">{{Notes.title | uppercase}}</p>
+                      <small style="color: rgba(0, 0, 0, 0.523);"> Created On : {{Notes.created_at |
+                        date:"fullDate"}}</small>
+                      <br><br>
+
+                      <!-- text-truncate -->
+                      <p class="card-text text-truncate" style="max-width:100%;">{{Notes.content}}</p>
+
+                      <p class="d-flex justify-content-end">
+                        <button type="button" class="btn text-dark" (click)="setUpdate(Notes)" data-bs-toggle="modal"
+                          data-bs-target="#exampleModal2">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+                            class="bi bi-pen" viewBox="0 0 16 16">
+                            <path
+                              d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z" />
+                          </svg>
+
+                          <!-- Edit or Delete Button -->
+                        </button>
+                        <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal2" class="btn "
+                          style="color: #4904a9;" data-bs-toggle="modal" data-bs-target="#exampleModal3">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+                            class="bi bi-trash3" viewBox="0 0 16 16">
+                            <path
+                              d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z" />
+                          </svg>
+                        </button>
+                      </p>
+                    </div>
+                  </div>
+
+                  <!-- Modal Confirmation Before Delete  -->
+                  <div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                      <div class="modal-content">
+                        <div class="modal-header text-light" style="background-color: #e94e58 ; color: white;">
+                          <h5 class="modal-title fs-5" id="exampleModalLabel">Delete Note Confirmation
+                          </h5>
+                          <button type="button" class="btn-close " style="color: white;" data-bs-dismiss="modal"
+                            aria-label="Close"> </button>
+                        </div>
+                        <div class="modal-body">
+                          <p>Are you sure you want to delete these note Id : {{Notes.id}}? </p>
+
+                          <div class="modal-footer">
+                            <button type="submit" class="btn btn-dark" data-bs-dismiss="modal"
+                              (click)="setDelete(Notes.id)">Yes</button>
+                            <button type="button" class="btn  btn-outline-danger"
+                              data-bs-dismiss="modal">Cancel</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <span class="float-start fs-6 fw-bold mt-3">
+                    <img src="http://127.0.0.1:8000/profile/{{image}}" class="rounded-circle" alt="Profile" width="30"
+                      height="30">
+                    <span style="color: #7205e0;"> | </span>
+                    {{Notes.title}}
+                    <small style="color: rgba(0, 0, 0, 0.302); font-size:12px;">: Updated On : {{Notes.updated_at |
+                      date:"fullDate"}}</small>
+                  </span>
+                </div>
+
+                <!-- Pagination controls  -->
+                <div class=" d-flex flex-row-reverse">
+                  <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="p = $event">
+                  </pagination-controls>
+                </div>
+
+                <!-- Footer for Developer Name -->
+                <div class="container-fluid mt-5 pt-5">
+                  <div class="container-lg pb-3">
+                    <span style="color: #4904a9;"> All Rights Reserve 2023 | By Intern Team <svg
+                        xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-r-circle" viewBox="0 0 16 16">
+                        <path
+                          d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8Zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0ZM5.5 4.002h3.11c1.71 0 2.741.973 2.741 2.46 0 1.138-.667 1.94-1.495 2.24L11.5 12H9.98L8.52 8.924H6.836V12H5.5V4.002Zm1.335 1.09v2.777h1.549c.995 0 1.573-.463 1.573-1.36 0-.913-.596-1.417-1.537-1.417H6.835Z" />
+                      </svg>
+                    </span>
+                  </div>
+                </div>
+
+              </div>
+
+            </ng-template>
+
+            <!-- Template for not having a notes created -->
+            <ng-template #elseTemplateName>
+              <div class="not-found fs-5">
+                You can now create your own notes here.
+              </div>
+            </ng-template>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Loading Spinner  -->
+    <ngx-spinner type="ball-scale-multiple"> </ngx-spinner>
+
+
+    <!-- View Profile Modal | Analytics  -->
+    <div class="modal fade" id="exampleModalView" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5 fw-bold" id="exampleModalLabel"> <span> <img
+                  src="http://127.0.0.1:8000/profile/{{image}}" class="rounded-circle" alt="Profile" width="60"
+                  height="60"></span> &nbsp;&nbsp;{{name}}</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p>
+              Notes Created : {{arrayCount}}
+            </p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
+            <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <!-- Settings Modal  -->
+    <div class="modal fade" id="exampleModalSettings" tabindex="-1" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5 fw-bold" id="exampleModalLabel"> <span> <img
+                  src="http://127.0.0.1:8000/profile/{{image}}" class="rounded-circle" alt="Profile" width="60"
+                  height="60"></span> &nbsp;&nbsp;Settings</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            ...
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
+            <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Search Modal  -->
+    <div class="modal fade" id="exampleModalSearch" tabindex="-1" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5 fw-bold" id="exampleModalLabel"> <span> <img
+                  src="http://127.0.0.1:8000/profile/{{image}}" class="rounded-circle" alt="Profile" width="60"
+                  height="60"></span> &nbsp;&nbsp;Search Notes</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p>
+              <input type="text" [(ngModel)]="keyword" name="keyword" class="form-control border-1 rounded "
+                style="background-color: #ffffff; padding:6px;" aria-label="Sizing example input"
+                aria-describedby="basic-addon1" placeholder="filter notes title, keyword or date ">
+            </p>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
+            <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>

@@ -1,0 +1,95 @@
+<!-- for permission of the user  -->
+<div *ngxPermissionsOnly="'Admin'">
+
+   
+
+
+<nav class="navbar navbar-expand-lg bg-body-tertiary shadow-lg pt-1 pb-1 px-5  sticky-top">
+    <div class="container-fluid pe-2 ps-2"> 
+      <p class="navbar-brand fw-bold pt-3" >Notes Admininistrator</p>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse " id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mt-3 pb-3" >
+          <li class="nav-item" >
+            <a class="nav-link " style="color: rgb(0, 0, 0);"  routerLink="/admin" routerLinkActive="active" [routerLinkActiveOptions]={exact:true} >DASHBOARD</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="notes" style="color: rgb(0, 0, 0);"  routerLinkActive="active" >NOTES</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="users" style="color: rgb(0, 0, 0);" routerLinkActive="active" >USERS</a>
+          </li>
+          
+          <!-- <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Dropdown
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Action</a></li>
+              <li><a class="dropdown-item" href="#">Another action</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#">Something else here</a></li>
+            </ul>
+          </li> -->
+          
+        </ul> 
+        <div class="d-flex" role="search">
+            <!-- <img src="https://scontent.fcrk1-5.fna.fbcdn.net/v/t39.30808-6/335445614_966425147849189_4363211722234034224_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=09cbfe&_nc_eui2=AeHHHPZYA6Fjw2vCn_3PuLA7IVtOoTM7icshW06hMzuJy1dDoAOXh-pClPmfz3rUOs6RTKfb9QENheyRUCLhCXap&_nc_ohc=S-tb2_djtn4AX-ljzT1&_nc_ht=scontent.fcrk1-5.fna&oh=00_AfArFOuCnAyIRFGSHHNdjzyruFnIQqd7mDNfXjtrkrU8Zg&oe=6416AF83" alt="" width="40" height="40" class="rounded-circle"> -->
+             <!-- <input class="form-control me-2 mx-2" type="search" placeholder="Search" aria-label="Search"> -->
+          <!-- <button class="btn btn-outline-success" type="submit">Search</button> -->
+         
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 "> 
+                 <li class="nav-item">
+                <!-- <img src="https://scontent.fcrk1-5.fna.fbcdn.net/v/t39.30808-6/335445614_966425147849189_4363211722234034224_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=09cbfe&_nc_eui2=AeHHHPZYA6Fjw2vCn_3PuLA7IVtOoTM7icshW06hMzuJy1dDoAOXh-pClPmfz3rUOs6RTKfb9QENheyRUCLhCXap&_nc_ohc=S-tb2_djtn4AX-ljzT1&_nc_ht=scontent.fcrk1-5.fna&oh=00_AfArFOuCnAyIRFGSHHNdjzyruFnIQqd7mDNfXjtrkrU8Zg&oe=6416AF83" alt="" width="35" height="35" class="rounded-circle"> -->
+                </li>
+
+            <li class="nav-item  ">
+               <button class="btn position-relative border border-1 fw-bold">
+                <!-- Search Notes -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                  <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                </svg>
+              </button>
+                
+            </li>
+            <li class="nav-item pe-4 ">
+                <button type="button" class="btn btn-white position-relative border border-1 fw-bold"> 
+                   <!-- Notifications  -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-bell" viewBox="0 0 16 16">
+                        <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zM8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z"/>
+                      </svg>
+                    <span class="position-absolute top-0 start-90 bottom-60 translate-middle badge rounded-pill " style="background-color: blueviolet;">1</span>
+                </button>
+                  
+            </li> 
+
+            <li class="nav-item dropdown"> 
+                 <img src="https://scontent.fcrk1-5.fna.fbcdn.net/v/t39.30808-6/335445614_966425147849189_4363211722234034224_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=09cbfe&_nc_eui2=AeHHHPZYA6Fjw2vCn_3PuLA7IVtOoTM7icshW06hMzuJy1dDoAOXh-pClPmfz3rUOs6RTKfb9QENheyRUCLhCXap&_nc_ohc=S-tb2_djtn4AX-ljzT1&_nc_ht=scontent.fcrk1-5.fna&oh=00_AfArFOuCnAyIRFGSHHNdjzyruFnIQqd7mDNfXjtrkrU8Zg&oe=6416AF83" alt="" width="35" height="35" class="rounded-circle">
+                
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle fw-bold" style="color: rgb(0, 0, 0);" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+               {{name}}
+              </a>
+              <ul class="dropdown-menu">
+                <li class="px-2" (click)="logout()"> 
+                  <span >Logout</span>
+                </li>
+                
+              </ul>
+            </li>
+        </ul> 
+        </div>
+    </div>
+    </div>
+  </nav>  
+
+  <router-outlet></router-outlet>
+
+
+</div>
+
+
+  

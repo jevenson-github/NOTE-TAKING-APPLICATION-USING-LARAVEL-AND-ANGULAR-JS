@@ -1,0 +1,77 @@
+<div class="register-div">
+    <header class="">
+          <h1 class="display-6">REGISTER </h1>
+    </header> 
+
+    <form  (ngSubmit)="submit()" [formGroup]="form" class="form-div"> 
+        <!-- Name  -->
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label  fw-normal fs-5" style="color: #7205e0;">Name  </label> 
+            <input type="text" formControlName="name" name="name" class="form-control" [ngClass]="{'is-invalid' : submitted && f['name'].errors}"  placeholder="name">
+            
+            <div *ngIf="submitted && f['name'].errors" class="invalid-feedback">
+                    <div *ngIf="f['name'].errors['required']">
+                        Name is required
+                    </div>
+            </div>
+        </div>  
+        
+        <!--Email-->
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label  fw-normal fs-5" style="color: #7205e0;">Email Address </label>
+          <input type="email" formControlName="email" name="email" class="form-control"   [ngClass]="{'is-invalid' : submitted && f['email'].errors}"  placeholder="email">
+          <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+            
+          <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+            <div *ngIf="f['email'].errors['required']">
+                Email is required
+            </div> 
+
+            <div *ngIf="f['email'].errors['email']">
+                Email must be a valid email address 
+            </div>
+          </div>
+       
+        </div>  
+        <!-- image  -->
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label text-success fw-normal fs-5">Select  Avatar </label>   
+              <input type="file" name="file" id="formFile" class="form-control" (change)="imageUpload($event)" required> 
+            </div>
+
+        <!-- Password  -->
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label  fw-normal fs-5" style="color: #7205e0;">Password  </label>
+          <input type="password" formControlName="password"  name="password" class="form-control" id="exampleInputPassword1" [ngClass]="{'is-invalid' : submitted && f['password'].errors}" placeholder="password">
+       
+                <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
+                    <div *ngIf="f['password'].errors['required']">
+                        Password is required
+                    </div> 
+                    <div *ngIf="f['password'].errors['minlength']">
+                        Password must be aleast 6 characters 
+                    </div>
+                    </div>
+
+        </div> 
+        
+        <!-- Confirm Password  -->
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label  fw-normal fs-5" style="color: #7205e0;">Confirm Password</label>
+            <input type="password" formControlName="confirmPassword" name="confirm_password" class="form-control " id="exampleInputPassword1" [ngClass]="{'is-invalid' : submitted && f['confirmPassword'].errors}" placeholder="confirm password">
+          
+            <div *ngIf="submitted && f['confirmPassword'].errors" class="invalid-feedback">
+                <div *ngIf="f['confirmPassword'].errors['required']">
+                    Confirm Password is required
+                </div> 
+                <div *ngIf="f['confirmPassword'].errors['mustMatch']">
+                    Password must match
+                </div>
+                </div>
+        </div>
+        
+        <button type="submit" class="btn mt-5 text-white" style="background-color: #7205e0;">Register</button>
+        &nbsp;
+        <a  routerLink="/login" class="btn btn-outline-dark mt-5">Login Here</a>
+      </form>
+</div>

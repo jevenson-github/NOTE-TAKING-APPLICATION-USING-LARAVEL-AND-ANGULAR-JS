@@ -1,0 +1,58 @@
+
+<div class="form-div">
+    <header class="">
+          <h1 class="" style="color: #000000;">LOGIN</h1>
+    </header> 
+    <form (ngSubmit)="submit()" [formGroup]="form" class="form-body"> 
+        <!--Email-->
+         <!--Email-->
+         <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label  fw-normal fs-5" style="color: #7205e0;">Email address </label>
+          <input type="email" formControlName="email" name="email" class="form-control"   
+          [ngClass]="{'is-invalid' : submitted && f['email'].errors}"  placeholder="Email">
+
+          <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
+         
+          <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+            <div *ngIf="f['email'].errors['required']">
+                Email is required
+            </div> 
+
+            <div *ngIf="f['email'].errors['email']">
+                Email must be a valid email address 
+            </div>
+          </div>
+       
+        </div>  
+            
+         <!-- Password  -->
+         <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label  fw-normal fs-5 " style="color: #7205e0;">Password  </label>
+          <input type="password" formControlName="password"  name="password" class="form-control" id="exampleInputPassword1" 
+          [ngClass]="{'is-invalid' : submitted && f['password'].errors}" placeholder=" Password">
+       
+                <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
+                    <div *ngIf="f['password'].errors['required']">
+                        Password is required
+                    </div> 
+                    <div *ngIf="f['password'].errors['minlength']">
+                        Password must be aleast 6 characters 
+                    </div>
+                    </div>
+        </div> 
+        <br>
+        <!-- forgot password  -->
+        <small style="color: blue;"> 
+         <a routerLink="/request-password-reset"> Forgot Password ? </a>
+          
+        </small>
+        <br><br> 
+
+        <button type="submit" class="btn text-white" style="background-color: #7205e0;">Login</button> 
+        &nbsp;
+        <a  routerLink="/register" class="mt-5 register-button">Register Here</a>
+      </form> 
+   
+</div>
+
+
